@@ -6,8 +6,31 @@
 
 
 // Summing an array of numbers:
+/*
+const nums = [0, 1, 2, 3, 4];
+let sum = nums.reduce((acc, curr) => acc + curr);
+console.log(sum);
+*/
 
 
+//Same as above but takes 2nd param as initial value
+const nums = [0, 1, 2, 3, 4];
+let sum = nums.reduce((acc, curr) => acc + curr, 0/*initial value*/);
+console.log(sum);
+
+
+// broken down to see how it works during execution
+/*const nums = [0, 1, 2, 3, 4];
+let sum = nums.reduce((acc, curr) => {
+  console.log(
+    "Accumulator:", acc,
+    "Current Value:", curr,
+    "Total:", acc + curr
+  );
+  return acc + curr;
+});
+console.log(sum);
+*/
 const teamMembers = [
   {
     name: 'Andrew',
@@ -28,10 +51,29 @@ const teamMembers = [
     name: 'Kelly',
     profession: 'Designer',
     yrsExperience: 3
+  },
+  {
+    name: 'Mark',
+    profession: 'Manager',
+    yrsExperience: 10
   }
 ];
 
 // Totaling a specific object property
-
+let totalExperience = teamMembers.reduce((acc, curr) => acc + curr.yrsExperience, 0);
+console.log(totalExperience);
 
 // Grouping by a property, and totaling it too
+// {Developer: 12, Designer: 4} <-- this is what we want
+let experienceByProfession = teamMembers.reduce((acc, curr) => {
+  let key = curr.profession;
+  if (!acc[key]) {
+    acc[key] = curr.yrsExperience;
+  } else {
+    acc[key] += curr.yrsExperience;
+  }
+  return acc;
+}, {});
+
+console.log(experienceByProfession);
+ 
